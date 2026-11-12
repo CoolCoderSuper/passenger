@@ -7,7 +7,7 @@ using Passenger.Text;
 
 namespace Passenger.Languages;
 
-/// <summary>What answers for a language's files beyond the editor: the C# language server (C# and Razor), Passenger's
+/// <summary>What answers for a language's files beyond the editor: the Roslyn language server (C#, Visual Basic and Razor), Passenger's
 /// XAML, an MSBuild evaluation, one of the web languages' servers, Godot's for GDScript, or nothing.</summary>
 public enum LanguageService
 {
@@ -161,6 +161,9 @@ public sealed class Language
     /// <summary>C#, coloured and folded by its own parse; its grammar is only what Razor and Markdown's fences embed.</summary>
     public static readonly Language CSharp = new(LanguageIds.CSharp, "C#", ["*.cs", "*.csx"], line: "//", block: ("/*", "*/"),
         grammar: new("source.cs", "csharp.tmLanguage.json"), service: LanguageService.CSharp, parsed: true);
+
+    public static readonly Language VisualBasic = new(LanguageIds.VisualBasic, "Visual Basic", ["*.vb"], line: "'",
+        grammar: new("source.asp.vb.net", "asp-vb-net.tmLanguage.json"), service: LanguageService.CSharp);
 
     public static readonly Language Razor = new(LanguageIds.Razor, "Razor", ["*" + RazorFiles.Component, "*" + RazorFiles.Page], block: ("@*", "*@"),
         grammar: new("text.aspnetcorerazor", "aspnetcorerazor.tmLanguage.json", Tags.Html), service: LanguageService.CSharp, literals: LiteralLines.Preformatted);

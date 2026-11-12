@@ -448,6 +448,10 @@ public sealed class LanguageServer : IAsyncDisposable
         {
             arguments.AddRange(["--extension", RoslynExtension.Assembly]);
         }
+        // The compiler is an extension too: Roslyn discovers its compiler diagnostics through the extension paths.
+        arguments.AddRange(["--extension", Path.Combine(AppContext.BaseDirectory, "visual-basic", "Microsoft.CodeAnalysis.VisualBasic.dll"),
+            "--extension", Path.Combine(AppContext.BaseDirectory, "visual-basic", "Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll"),
+            "--extension", Path.Combine(AppContext.BaseDirectory, "visual-basic", "Microsoft.CodeAnalysis.VisualBasic.Features.dll")]);
         // On the runtime Passenger runs on, whatever the machine has: with no .NET at all, a lone file still has its help.
         ProcessStartInfo start = ChildProcesses.ConservingMemory(ChildProcesses.NamingDotnet(ChildProcesses.HelperCommand(server, arguments)));
         // A server's MSBuild nodes are its own: a restart ends them, which would cut short a build that took one up.

@@ -899,7 +899,7 @@ public sealed partial class CSharpService : IAsyncDisposable
         IdeErrors.Observe(Run(workspace, cancel.Token));
     }
 
-    /// <summary>Gives an open document its C# features, now or once the server is ready: a C# file, or a Razor file
+    /// <summary>Gives an open document its Roslyn features, now or once the server is ready: a C# or Visual Basic file, or a Razor file
     /// (.razor, .cshtml), which the server's Razor answers for, the C# in it included. A generator's code copied is followed
     /// instead (<see cref="Generated"/>): opened in the server, it would be one of its Miscellaneous Files.</summary>
     public void Attach(OpenDocument document)

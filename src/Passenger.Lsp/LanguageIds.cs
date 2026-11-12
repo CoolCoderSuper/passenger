@@ -6,5 +6,6 @@ namespace Passenger.Lsp;
 public static class LanguageIds
 {
     public const string CSharp = "csharp";
+    public const string VisualBasic = "vb";
     public const string Razor = "aspnetcorerazor";
 }

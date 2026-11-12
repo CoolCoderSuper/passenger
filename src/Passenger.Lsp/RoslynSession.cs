@@ -496,7 +496,9 @@ public sealed class LspDocument : IDisposable
         Uri = uri;
         Text = text;
         IsRazor = languageId is null && RazorFiles.Is(uri);
-        LanguageId = languageId ?? (IsRazor ? LanguageIds.Razor : LanguageIds.CSharp);
+        LanguageId = languageId ?? (IsRazor ? LanguageIds.Razor
+            : new Uri(uri).AbsolutePath.EndsWith(".vb", StringComparison.OrdinalIgnoreCase) ? LanguageIds.VisualBasic
+            : LanguageIds.CSharp);
         closed = !opened;
         if (opened)
         {
@@ -543,7 +545,7 @@ public sealed class LspDocument : IDisposable
     public string Uri { get; }
     public TextDocument Text { get; }
 
-    /// <summary>The language the server was told the document is in: C#'s or Razor's (<see cref="LanguageIds"/>), or a web
+    /// <summary>The language the server was told the document is in: C#'s, Visual Basic's or Razor's (<see cref="LanguageIds"/>), or a web
     /// language's (<c>typescript</c>, <c>javascriptreact</c>, <c>html</c>, <c>scss</c>, <c>jsonc</c>).</summary>
     [IdentifierOf(typeof(LanguageIds))]
     public string LanguageId { get; }

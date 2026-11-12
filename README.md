@@ -66,6 +66,12 @@ window runs EF Core 11's `dotnet ef` with the defaults `.config/dotnet-ef.json` 
 and .NET 11 runs its tests under each. Open a .NET 11 project without its SDK and Passenger offers to install it into
 your own folder.
 
+### Visual Basic
+
+Visual Basic projects (`.vbproj`) use the same Roslyn server for completion, diagnostics, navigation, formatting and
+rename, including references between C# and VB projects. `.vb` files have syntax highlighting and apostrophe line
+comments even before the server starts. C# syntax-based editing and refactoring commands remain specific to C#.
+
 ### Debugging
 
 Passenger's own debugger (started from SharpDbg and ICorDebugSharp, over ICorDebug): breakpoints with conditions, hit

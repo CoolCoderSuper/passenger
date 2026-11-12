@@ -9,6 +9,10 @@
        and run, never linked. -->
   <Import Project="RoslynServer.targets" />
   <ItemGroup>
+    <PackageDownload Include="Microsoft.CodeAnalysis.VisualBasic;Microsoft.CodeAnalysis.VisualBasic.Workspaces;Microsoft.CodeAnalysis.VisualBasic.Features"
+                     Version="[$(VisualBasicServicesVersion)]" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../tools/Passenger.RoslynPatch/Passenger.RoslynPatch.csproj" ReferenceOutputAssembly="false" Private="false"
                       GlobalPropertiesToRemove="RuntimeIdentifier;SelfContained;PublishReadyToRun" />
   </ItemGroup>
@@ -44,6 +48,7 @@
     <ItemGroup>
       <RoslynServerForNotices Include="$(RoslynServerPackage)" Kind="package" Folder="$(RoslynServerFolder)" />
       <RoslynServerForNotices Include="@(RoslynServerLeftOut)" Kind="leftOut" />
+      <RoslynServerForNotices Include="Microsoft.CodeAnalysis.VisualBasic/$(VisualBasicServicesVersion);Microsoft.CodeAnalysis.VisualBasic.Workspaces/$(VisualBasicServicesVersion);Microsoft.CodeAnalysis.VisualBasic.Features/$(VisualBasicServicesVersion)" Kind="additionalPackage" />
     </ItemGroup>
   </Target>
 
@@ -51,6 +56,11 @@
        beside its own binaries, with the package's third-party notices. -->
   <Target Name="IncludeRoslynServer" BeforeTargets="AssignTargetPaths" DependsOnTargets="FindRoslynServer;PatchRoslynServer">
     <ItemGroup>
+      <VisualBasicServerFile Include="$(NuGetPackageRoot)microsoft.codeanalysis.visualbasic/$(VisualBasicServicesVersion)/lib/net10.0/Microsoft.CodeAnalysis.VisualBasic.dll" />
+      <VisualBasicServerFile Include="$(NuGetPackageRoot)microsoft.codeanalysis.visualbasic.workspaces/$(VisualBasicServicesVersion)/lib/net10.0/Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll" />
+      <VisualBasicServerFile Include="$(NuGetPackageRoot)microsoft.codeanalysis.visualbasic.features/$(VisualBasicServicesVersion)/lib/net10.0/Microsoft.CodeAnalysis.VisualBasic.Features.dll" />
+      <None Include="@(VisualBasicServerFile)" Link="visual-basic/%(VisualBasicServerFile.Filename)%(VisualBasicServerFile.Extension)"
+            CopyToOutputDirectory="PreserveNewest" Visible="false" />
       <RoslynServerNotices Include="$(RoslynServerPackage)ThirdPartyNotices.*" />
     </ItemGroup>
     <Error Condition="'@(RoslynServerNotices)' == ''"

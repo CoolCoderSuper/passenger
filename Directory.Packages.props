@@ -7,6 +7,9 @@
          global.json's SDK. A build that starts Visual Studio Telemetry's session even with telemetry off (from
          5.12.0-1.26475.2 until one carries dotnet/roslyn#86130) is carried with it cut off (tools/Passenger.RoslynPatch). -->
     <RoslynServerVersion>5.13.0-1.26514.10</RoslynServerVersion>
+    <!-- VB's compiler and services must match the server's internal APIs exactly. Microsoft's dotnet-tools feed
+         publishes these builds alongside the server; nuget.org carries only the stable VB packages. -->
+    <VisualBasicServicesVersion>$(RoslynServerVersion)</VisualBasicServicesVersion>
     <!-- Avalonia's dotnet new templates at the Avalonia version below, downloaded for the tests' local feed so no test
          reaches nuget.org for them. -->
     <AvaloniaTemplatesVersion>12.1.5</AvaloniaTemplatesVersion>

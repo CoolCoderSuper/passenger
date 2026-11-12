@@ -64,7 +64,8 @@ bytes). Headless, dispatcher timers fire only inside a running frame (`Screensho
 
 **Build facts.** Everything builds under `artifacts/`. Package versions live only in `Directory.Packages.props` (each
 kept pin saying why), shared properties only in `Directory.Build.props` (the version too). Packages come from nuget.org
-alone, as it signed them, at what each `packages.lock.json` pins: CI restores locked, so commit a rewritten lock file
+alone, as it signed them, except the three Microsoft-signed VB service packages matching Roslyn's server, mapped only
+to Microsoft's dotnet-tools feed in `nuget.config`. Referenced packages use what each `packages.lock.json` pins: CI restores locked, so commit a rewritten lock file
 with its change; every lock file holds all eight `RuntimeIdentifiers`, even a Windows-only project's (a publish's RID
 reaches every referenced project's restore). Every recipe and CI set `AVALONIA_TELEMETRY_OPTOUT=1`. The App and the
 tests run with a 4 MB `System.GC.Gen0MaxBudget`, so a young collection fits a 144 Hz frame.

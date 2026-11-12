@@ -8,6 +8,10 @@ the solution restores, Roslyn's language server carries, the container tools car
 
 ## In the app
 
+Visual Basic's compiler and services are carried under `visual-basic/`. Their versions match Roslyn's server exactly,
+from Microsoft's `dotnet-tools` feed, restricted to these three package IDs in `nuget.config` and verified against
+Microsoft's author-signing certificate.
+
 What `just publish` carries for macOS, Windows and Linux: the app, the debugger beside it under `debugger/`, the
 project host under `host/` (MSBuild's evaluation in a process of its own, run on the .NET it carries with the installed
 SDK's MSBuild, of which it carries nothing), Roslyn's language server under `roslyn/` and Passenger's own extension to
@@ -21,6 +25,7 @@ out; dbgshim's musl Linux natives are the container tools' (below), which the ap
 
 | Package | In Passenger | Licence | Copyright |
 |---|---|---|---|
+| `Microsoft.CodeAnalysis.VisualBasic`, `Microsoft.CodeAnalysis.VisualBasic.Workspaces`, `Microsoft.CodeAnalysis.VisualBasic.Features` | Visual Basic compilation and editor services loaded into Roslyn's server | MIT | © Microsoft Corporation. All rights reserved. |
 | `Google.Protobuf` | Aspire resource service protocol messages | BSD-3-Clause | Copyright 2015, Google Inc. |
 | `Grpc.Net.Client`, `Grpc.Net.Common`, `Grpc.Core.Api` | Native Aspire interactions and resource commands | Apache-2.0 | Copyright 2019 The gRPC Authors |
 | `Microsoft.Extensions.Logging.Abstractions` | gRPC client's logging contracts | MIT | © Microsoft Corporation. All rights reserved. |
@@ -875,6 +880,9 @@ Microsoft Corporation), unchanged, from the project its header names:
   Docker's NOTICE.
 - `ini.tmLanguage.json` (VS Code 1.144.0, `extensions/ini`): converted from textmate/ini.tmbundle
   (https://github.com/textmate/ini.tmbundle), under the TextMate bundle licence below; it colours .editorconfig files.
+- `asp-vb-net.tmLanguage.json` (VS Code, `extensions/vb`): converted from textmate/asp.vb.net.tmbundle
+  (https://github.com/textmate/asp.vb.net.tmbundle) at commit 72d44550b3286d0382d7be0624140cf97857ff69,
+  under the TextMate bundle licence below; it colours Visual Basic files.
 - `MagicPython.tmLanguage.json` (VS Code 1.144.0, `extensions/python`): converted from MagicStack/MagicPython
   (https://github.com/MagicStack/MagicPython) at commit 7d0f2b22, its 1.1.1, MIT, Copyright (c) 2015-present MagicStack
   Inc.
@@ -944,7 +952,7 @@ SOFTWARE.
 ```
 
 The TextMate bundles textmate/xml.tmbundle, textmate/markdown.tmbundle, textmate/html.tmbundle,
-textmate/css.tmbundle and textmate/javascript.tmbundle, each in its README:
+textmate/css.tmbundle, textmate/javascript.tmbundle and textmate/asp.vb.net.tmbundle, each in its README:
 
 ```
 If not otherwise specified (see below), files in this repository fall under the following license:

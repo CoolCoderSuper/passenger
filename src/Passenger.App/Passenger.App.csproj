@@ -198,6 +198,7 @@
       <NoticeLine Include="@(NoticesServerPackage->'server=%(Identity)')" />
       <NoticeLine Include="@(NoticesServerPackage->'serverFolder=%(Folder)')" />
       <NoticeLine Include="@(NoticesServer->WithMetadataValue('Kind', 'leftOut')->'serverLeftOut=%(Identity)')" />
+      <NoticeLine Include="@(NoticesServer->WithMetadataValue('Kind', 'additionalPackage')->'package=%(Identity)')" />
       <NoticeLine Include="@(NoticesWeb->'node=%(Identity)node_modules')" />
       <NoticeLine Include="text=JetBrains Mono, the editor's typeface, is under the SIL Open Font License 1.1, as JetBrains Mono gives it|$(NoticesRepository)src/Passenger.Editor/Fonts/OFL.txt" />
       <NoticeLine Include="text=Inter, the window's typeface, is under the SIL Open Font License 1.1, as Inter gives it|$(NoticesRepository)src/Passenger.App/Fonts/OFL.txt" />
